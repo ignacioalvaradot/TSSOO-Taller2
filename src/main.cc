@@ -4,8 +4,7 @@
 uint64_t *paralelo = nullptr;
 uint64_t *sum_parciales = nullptr;
 uint64_t *mismo = nullptr;
-uint32_t sum_secuencial1 = 0;
-uint32_t band = 0;
+uint64_t sum_secuencial1 = 0;
 
 void sum_parcial(size_t pos,
 				 size_t beginIndex,
@@ -37,6 +36,7 @@ void fillArray(uint32_t l_superior, uint32_t l_inferior, size_t beginIndex,
 }
 int main(int argc, char **argv)
 {
+	uint64_t band = 0;
 	uint64_t totalElementos;
 	uint32_t numThreads;
 	uint32_t l_superior;
@@ -119,10 +119,14 @@ int main(int argc, char **argv)
 	std::cout << "limite Superior: " << l_superior << std::endl;
 	std::cout << "Suma de elementos del arreglo con threads: " << band << std::endl;
 	std::cout << "Suma de elementos del arreglo secuencial: " <<  sum_secuencial1<< std::endl;
+	std::cout << "-------Tiempos modulo suma ------" << std::endl;
 	std::cout << "Tiempo de suma de los elementos con threads: " << tiempo_suma << std::endl;
 	std::cout << "Tiempo de suma de los elementos secuencial: " << tiempo_suma_secuencial << std::endl;
-	std::cout << "Tiempo de llenado con threads: " << tiempo_arreglo << std::endl;	
+	std::cout << "Aceleracion  etapa de Llenado: " << (double)tiempo_suma_secuencial/tiempo_suma << std::endl;
+	std::cout << "-------Tiempos modulo Llenado -------" << std::endl;
+	std::cout << "Tiempo de llenado con threads: " << tiempo_arreglo << std::endl;
 	std::cout << "Tiempo llenado secuencial: " << totalTimeFill_secuencial << std::endl;
+	std::cout << "Aceleracion etapa de Llenado: " << (double)totalTimeFill_secuencial/tiempo_arreglo << std::endl;
 
 	return (EXIT_SUCCESS);
 }
